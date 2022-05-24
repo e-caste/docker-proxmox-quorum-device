@@ -1,0 +1,13 @@
+version: '3.1'
+services:
+  quorum-device:
+    build: .
+    restart: on-failure
+    # allow ssh login with password
+    volumes:
+    - ./sshd_config:/etc/ssh/sshd_config
+    # https://pve.proxmox.com/pve-docs/pvecm.1.html at Requirements
+    ports:
+    # - "22:22"  # remember to comment this out after running "pvecm qdevice setup <host IP>" so that the ssh port can be used on the host machine
+    - "5404:5404/udp"
+    - "5405:5405/udp"
